@@ -7,7 +7,7 @@ from selenium.webdriver.common.keys import Keys
 import time 
  
 
-# def run_bot(self):
+# change this path to your where you saved your Chrome Driver:
 path = Service("/Users/fineas/Desktop/Coding/chromedriver_mac_arm64/chromedriver")
 
 chrome_options = Options()
