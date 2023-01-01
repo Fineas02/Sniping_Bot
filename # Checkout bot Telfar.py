@@ -7,7 +7,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support import relative_locator as RL
-
+from selenium.webdriver.support.ui import Select
 import time 
  
 
@@ -60,8 +60,9 @@ try:
     city = driver.find_element(By.XPATH, '//*[@id="checkout_shipping_address_city"]')
     city.send_keys("Virginia Beach")
 
-    # state = driver.find_element(By.XPATH, '//*[@id="checkout_shipping_address_province"]')
-    # state.click()
+    state = driver.find_element(By.XPATH, '//*[@id="checkout_shipping_address_province"]')
+    sstate = Select(state)
+    sstate.select_by_visible_text("California")
 
     zip_code = driver.find_element(By.XPATH, '//*[@id="checkout_shipping_address_zip"]')
     zip_code.send_keys("90011")
@@ -81,7 +82,7 @@ try:
 # Fill out credit card information
     # Get all card iframes as a list
         iframes = driver.find_elements(By.CLASS_NAME, "card-fields-iframe")
-
+        
         # Switch to first iframe
         driver.switch_to.frame(iframes[0])
         number = driver.find_element(By.ID, "number")
@@ -120,6 +121,9 @@ try:
         same_as_ship = driver.find_element(By.ID, "checkout_different_billing_address_false")
         if same_as_ship.is_displayed:
             same_as_ship.click()
+        final_button = driver.find_element(By.ID, "continue_button")
+        if final_button.is_displayed:
+            final_button.click()
 
     
 finally:
